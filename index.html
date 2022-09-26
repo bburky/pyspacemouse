@@ -66,7 +66,7 @@ $(function() {
   <div class="headertitle"><div class="title">pyspacemouse </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a>3Dconnexion Space Mouse in Python using raw HID. Note: you <b>don't</b> need to install or use any of the drivers or 3Dconnexion software to use this package. It interfaces with the controller directly with <code>hidapi</code> and python library <code>easyhid</code>.</p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a>3Dconnexion Space Mouse in Python using raw HID. Note: you <b>don't</b> need to install or use any of the drivers or 3Dconnexion software to use this package. It interfaces with the controller directly with <code>hidapi</code> and python wrapper library <code>easyhid</code>.</p>
 <p >Connected project <a href="https://github.com/JakubAndrysek/pyspaceapp">pySpaceApp</a> is a simple example of how controll your PC with SpaceMouse.</p>
 <p >Forked from: <a href="https://github.com/johnhw/pyspacenavigator">johnhw/pyspacenavigator</a></p>
 <p >Implements a simple interface to the 6 DoF 3Dconnexion <a href="https://3dconnexion.com/uk/spacemouse">Space Mouse</a> device as well as similar devices. The following 3dconnexion devices are supported:</p>
@@ -205,7 +205,25 @@ Callback: print_state</h2>
 </pre> <h2><a class="anchor" id="autotoc_md11"></a>
 Callback: print_buttons</h2>
 <p >Print all buttons states </p><pre class="fragment">[ 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, ]
-</pre> </div></div><!-- PageDoc -->
+</pre> <h1><a class="anchor" id="autotoc_md12"></a>
+Troubleshooting</h1>
+<h2><a class="anchor" id="autotoc_md13"></a>
+‘ModuleNotFoundError: No module named 'easyhid’&lt;tt&gt;</h2>
+<ul>
+<li>Installeasyhid<code>by</code>pip install easyhid`</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md14"></a>
+‘AttributeError: function/symbol 'hid_enumerate’ not found in library '&lt;None&gt;': python3: undefined symbol: hid_enumerate`</h2>
+<ul>
+<li>HID library for your computer is not installed</li>
+<li>Follow the instructions in requirements</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md15"></a>
+&lt;tt&gt;Exception: No device connected/supported!&lt;/tt&gt;</h2>
+<ul>
+<li></li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
