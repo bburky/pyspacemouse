@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pyspacemouse_3',['pyspacemouse',['../index.html',1,'']]]
+  ['pyspacemouse_0',['pyspacemouse',['../index.html',1,'']]]
 ];
