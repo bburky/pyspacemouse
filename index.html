@@ -95,11 +95,16 @@ Linux</h2>
 <li>Compile and install <a href="https://github.com/libusb/hidapi/#build-from-source">hidapi</a> (other Linux distributions)</li>
 </ul>
 </li>
+<li>add rules for permission <div class="fragment"><div class="line">sudo echo &#39;KERNEL==&quot;hidraw*&quot;, SUBSYSTEM==&quot;hidraw&quot;, MODE=&quot;0664&quot;, GROUP=&quot;plugdev&quot;&#39; &gt; /etc/udev/rules.d/99-hidraw-permissions.rules</div>
+<div class="line">sudo usermod -aG plugdev $USER</div>
+<div class="line">newgrp plugdev</div>
+</div><!-- fragment --></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Windows</h2>
 <ul>
 <li>Install the latest release of hidapi.dll and hidapi.lib from the <a href="https://github.com/libusb/hidapi/releases">hidapi releases</a> page (not tested)</li>
+<li>Set system environment: add absolute path for <code>x64</code> or <code>x86</code> folder in Path.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Mac OS X</h2>
