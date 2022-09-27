@@ -66,10 +66,13 @@ $(function() {
   <div class="headertitle"><div class="title">pyspacemouse </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_README"></a>3Dconnexion Space Mouse in Python using raw HID. Note: you <b>don't</b> need to install or use any of the drivers or 3Dconnexion software to use this package. It interfaces with the controller directly with <code>hidapi</code> and python wrapper library <code>easyhid</code>.</p>
+<div class="textblock"><p ><a class="anchor" id="md_README"></a> 3Dconnexion Space Mouse in Python using raw HID. Note: you <b>don't</b> need to install or use any of the drivers or 3Dconnexion software to use this package. It interfaces with the controller directly with <code>hidapi</code> and python wrapper library <code>easyhid</code>.</p>
 <p >Connected project <a href="https://github.com/JakubAndrysek/pyspaceapp">pySpaceApp</a> is a simple example of how controll your PC with SpaceMouse.</p>
 <p >Forked from: <a href="https://github.com/johnhw/pyspacenavigator">johnhw/pyspacenavigator</a></p>
-<p >Implements a simple interface to the 6 DoF 3Dconnexion <a href="https://3dconnexion.com/uk/spacemouse">Space Mouse</a> device as well as similar devices. The following 3dconnexion devices are supported:</p>
+<p >Implements a simple interface to the 6 DoF 3Dconnexion <a href="https://3dconnexion.com/uk/spacemouse">Space Mouse</a> device as well as similar devices.</p>
+<p ><img src="media/spacemouse-robot.jpg" alt="" class="inline"/> Control a <a href="https://roboruka.robotickytabor.cz/">robot</a> with a Space Mouse</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Supported 3Dconnexion devices</h1>
 <ul>
 <li>SpaceNavigator</li>
 <li>SpaceMouse Pro</li>
@@ -78,45 +81,41 @@ $(function() {
 <li>3Dconnexion Universal Receiver</li>
 <li>SpaceMouse Compact</li>
 <li>SpacePilot Pro</li>
+<li><a href="https://github.com/johnhw/pyspacenavigator/issues/1">Add more devices</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1"></a>
-Requirements</h1>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Installation</h1>
 <ul>
-<li><a href="https://pypi.python.org/pypi/easyhid/">easyhid</a> to access HID data from Python - all platforms<ul>
-<li><code>pip install easyhid</code></li>
-</ul>
-</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md2"></a>
-Linux</h2>
-<ul>
-<li>[libhidapi-dev]() to access HID data<ul>
+<li><a href="https://github.com/libusb/hidapi">hidapi</a> is <code>C</code> library for direct communication with HID devices<ul>
+<li>### Linux<ul>
+<li>[libhidapi-dev]() to access HID data</li>
 <li><code>sudo apt-get install libhidapi-dev</code> (Debian/Ubuntu)</li>
-<li>Compile and install <a href="https://github.com/libusb/hidapi/#build-from-source">hidapi</a> (other Linux distributions)</li>
+<li>Compile and install <a href="https://github.com/libusb/hidapi/#build-from-source">hidapi</a>. (other Linux distributions)</li>
+<li>add rules for permissions ``&lsquo;bash sudo echo 'KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev"&rsquo; &gt; /etc/udev/rules.d/99-hidraw-permissions.rules sudo usermod -aG plugdev $USER newgrp plugdev ```</li>
 </ul>
 </li>
-<li>add rules for permission <div class="fragment"><div class="line">sudo echo &#39;KERNEL==&quot;hidraw*&quot;, SUBSYSTEM==&quot;hidraw&quot;, MODE=&quot;0664&quot;, GROUP=&quot;plugdev&quot;&#39; &gt; /etc/udev/rules.d/99-hidraw-permissions.rules</div>
-<div class="line">sudo usermod -aG plugdev $USER</div>
-<div class="line">newgrp plugdev</div>
-</div><!-- fragment --></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md3"></a>
-Windows</h2>
-<ul>
-<li>Install the latest release of hidapi.dll and hidapi.lib from the <a href="https://github.com/libusb/hidapi/releases">hidapi releases</a> page (not tested)</li>
+<li>### Windows<ul>
+<li>Install the latest release of hidapi.dll and hidapi.lib from the <a href="https://github.com/libusb/hidapi/releases">hidapi releases</a> page.</li>
 <li>Set system environment: add absolute path for <code>x64</code> or <code>x86</code> folder in Path.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
-Mac OS X</h2>
-<ul>
-<li><a href="https://formulae.brew.sh/formula/hidapi">hidapi</a><ul>
-<li><code>brew install hidapi</code> (not tested)</li>
+</li>
+<li>### Mac OS X<ul>
+<li>Install from <a href="https://formulae.brew.sh/formula/hidapi">Homebrew</a></li>
+<li><code>brew install hidapi</code></li>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md5"></a>
+</li>
+<li><a href="https://github.com/bglopez/python-easyhid">easyhid</a> is <code>hidapi</code> interface for Python - required on all platforms<ul>
+<li><code>pip install git+https://github.com/bglopez/python-easyhid.git</code></li>
+<li>this fork fix problems with <code>hidapi</code> on MacOS.</li>
+<li>on other platforms it possible works with original package <code>pip install easyhid</code></li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Basic Usage:</h1>
-<div class="fragment"><div class="line"><span class="keyword">import</span> pyspacemouse</div>
+<p ><a href="examples/basicExample.py">basicExample.py</a> </p><div class="fragment"><div class="line"><span class="keyword">import</span> pyspacemouse</div>
 <div class="line"><span class="keyword">import</span> time</div>
 <div class="line"> </div>
 <div class="line">success = pyspacemouse.open()</div>
@@ -125,7 +124,7 @@ Basic Usage:</h1>
 <div class="line">        state = pyspacemouse.read()</div>
 <div class="line">        print(state.x, state.y, state.z)</div>
 <div class="line">        time.sleep(0.01)</div>
-</div><!-- fragment --> <h1><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
 State objects</h1>
 <p >State objects returned from read() have 7 attributes: [t,x,y,z,roll,pitch,yaw,button].</p>
 <ul>
@@ -134,9 +133,9 @@ State objects</h1>
 <li>roll, pitch, yaw: rotations in the range [-1.0, 1.0].</li>
 <li>button: list of button states (0 or 1), in order specified in the device specifier</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Usage with callback</h1>
-<div class="fragment"><div class="line"><span class="keyword">import</span> pyspacemouse</div>
+<p ><a href="examples/callbackExample.py">callbackExample.py</a> </p><div class="fragment"><div class="line"><span class="keyword">import</span> pyspacemouse</div>
 <div class="line"><span class="keyword">import</span> time</div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -153,11 +152,9 @@ Usage with callback</h1>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">def </span>callback():</div>
-<div class="line">    button_arr = [</div>
-<div class="line">        pyspacemouse.ButtonCallback(0, button_0),</div>
-<div class="line">        pyspacemouse.ButtonCallback([1], <span class="keyword">lambda</span> state, buttons, pressed_buttons: print(<span class="stringliteral">&quot;Button: 1&quot;</span>)),</div>
-<div class="line">        pyspacemouse.ButtonCallback([0, 1], button_0_1),</div>
-<div class="line">    ]</div>
+<div class="line">    button_arr = [pyspacemouse.ButtonCallback(0, button_0),</div>
+<div class="line">                  pyspacemouse.ButtonCallback([1], <span class="keyword">lambda</span> state, buttons, pressed_buttons: print(<span class="stringliteral">&quot;Button: 1&quot;</span>)),</div>
+<div class="line">                  pyspacemouse.ButtonCallback([0, 1], button_0_1), ]</div>
 <div class="line"> </div>
 <div class="line">    success = pyspacemouse.open(dof_callback=pyspacemouse.print_state, button_callback=someButton,</div>
 <div class="line">                                button_callback_arr=button_arr)</div>
@@ -169,7 +166,7 @@ Usage with callback</h1>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> __name__ == <span class="stringliteral">&#39;__main__&#39;</span>:</div>
 <div class="line">    callback()</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
 API</h1>
 <pre class="fragment">open(callback=None, button_callback=None, button_callback_arr=None, set_nonblocking_loop=True, device=None)
     Open a 3D space navigator device. Makes this device the current active device, which enables the module-level read() and close()
@@ -188,13 +185,13 @@ API</h1>
 read()              Return a namedtuple giving the current device state (t,x,y,z,roll,pitch,yaw,button)
 close()             Close the connection to the current device, if it is open
 list_devices()      Return a list of supported devices found, or an empty list if none found
-</pre><p >open() returns a DeviceSpec object. If you have multiple 3Dconnexion devices, you can use the object-oriented API to access them individually. Each object has the following API, which functions exactly as the above API, but on a per-device basis: </p><pre class="fragment">dev.open()          Opens the connection (this is always called by the module-level open command,
+</pre><p> open() returns a DeviceSpec object. If you have multiple 3Dconnexion devices, you can use the object-oriented API to access them individually. Each object has the following API, which functions exactly as the above API, but on a per-device basis: </p><pre class="fragment">dev.open()          Opens the connection (this is always called by the module-level open command,
                     so you should not need to use it unless you have called close())
 dev.read()          Return the state of the device as namedtuple [t,x,y,z,roll,pitch,yaw,button]
 dev.close()         Close this device
 </pre><p> There are also attributes: </p><pre class="fragment">dev.connected       True if the device is connected, False otherwise
 dev.state           Convenience property which returns the same value as read()
-</pre> <h1><a class="anchor" id="autotoc_md9"></a>
+</pre> <h1><a class="anchor" id="autotoc_md7"></a>
 Predefined callbacks</h1>
 <div class="fragment"><div class="line"><span class="keyword">import</span> pyspacemouse</div>
 <div class="line"><span class="keyword">import</span> time</div>
@@ -204,29 +201,24 @@ Predefined callbacks</h1>
 <div class="line">    <span class="keywordflow">while</span> 1:</div>
 <div class="line">        state = pyspacemouse.read()</div>
 <div class="line">        time.sleep(0.01)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
 Callback: print_state</h2>
 <p >Print all axis states </p><pre class="fragment">x +0.00    y +0.00    z +0.00 roll +0.00 pitch +0.00  yaw +0.00    t +0.0
-</pre> <h2><a class="anchor" id="autotoc_md11"></a>
+</pre> <h2><a class="anchor" id="autotoc_md9"></a>
 Callback: print_buttons</h2>
 <p >Print all buttons states </p><pre class="fragment">[ 0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, ]
-</pre> <h1><a class="anchor" id="autotoc_md12"></a>
+</pre> <h1><a class="anchor" id="autotoc_md10"></a>
 Troubleshooting</h1>
-<h2><a class="anchor" id="autotoc_md13"></a>
-‘ModuleNotFoundError: No module named 'easyhid’&lt;tt&gt;</h2>
+<h2><a class="anchor" id="autotoc_md11"></a>
+ModuleNotFoundError: No module named 'easyhid'</h2>
 <ul>
-<li>Installeasyhid<code>by</code>pip install easyhid`</li>
+<li>Install <code>easyhid</code> by <code>pip install easyhid</code>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md14"></a>
-‘AttributeError: function/symbol 'hid_enumerate’ not found in library '&lt;None&gt;': python3: undefined symbol: hid_enumerate`</h2>
+<h2><a class="anchor" id="autotoc_md12"></a>
+AttributeError: function/symbol 'hid_enumerate' not found in library '&lt;None&gt;': python3: undefined symbol: hid_enumerate</h2>
 <ul>
-<li>HID library for your computer is not installed</li>
-<li>Follow the instructions in requirements</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md15"></a>
-&lt;tt&gt;Exception: No device connected/supported!&lt;/tt&gt;</h2>
-<ul>
-<li></li>
+<li>HID library for your computer is not installed.</li>
+<li>Follow the instructions in requirements. </li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
